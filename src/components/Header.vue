@@ -57,7 +57,7 @@ const totalPay = computed(() => {
     <div
       v-if="cartModal"
       id="carrito"
-      class="bg-white p-3 fixed right-10 top-14 z-50 rounded-lg w-80 md:w-96 shadow-lg"
+      class="bg-white p-3 fixed right-10 top-12 z-50 rounded-lg w-80 md:w-96 shadow-lg"
     >
       <p v-if="cart.length === 0" class="text-center">Cart is empty</p>
       <div v-if="cart.length > 0" class="grid">

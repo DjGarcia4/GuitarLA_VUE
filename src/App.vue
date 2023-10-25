@@ -22,6 +22,10 @@ onMounted(() => {
 const addCart = (guitar) => {
   const existCart = cart.value.findIndex((product) => product.id === guitar.id);
   if (existCart >= 0) {
+    if (cart.value[existCart].cant === 10) {
+      $toast.error(`Invalid cant!`);
+      return;
+    }
     cart.value[existCart].cant++;
     return;
   } else {
@@ -36,6 +40,7 @@ const decrementProduct = (id) => {
   const existCart = cart.value.findIndex((product) => product.id === id);
   if (existCart >= 0) {
     if (cart.value[existCart].cant === 1) {
+      $toast.error(`Invalid cant!`);
       return;
     }
     cart.value[existCart].cant--;
@@ -46,6 +51,7 @@ const incrementProduct = (id) => {
   const existCart = cart.value.findIndex((product) => product.id === id);
   if (existCart >= 0) {
     if (cart.value[existCart].cant === 10) {
+      $toast.error(`Invalid cant!`);
       return;
     }
     cart.value[existCart].cant++;
