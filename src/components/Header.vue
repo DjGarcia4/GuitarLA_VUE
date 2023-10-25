@@ -12,7 +12,13 @@ const props = defineProps({
   },
 });
 
-defineEmits(["add-cart", "decrement-product", "increment-product"]);
+defineEmits([
+  "add-cart",
+  "decrement-product",
+  "increment-product",
+  "delete-product",
+  "empty-cart",
+]);
 const cartModal = ref(false);
 const totalPay = computed(() => {
   return props.cart.reduce(
@@ -137,7 +143,10 @@ const totalPay = computed(() => {
                 </div>
               </td>
               <td>
-                <button type="button">
+                <button
+                  type="button"
+                  @click="$emit('delete-product', product.id)"
+                >
                   <v-tooltip activator="parent" location="top"
                     >Delete Product</v-tooltip
                   >
@@ -168,6 +177,7 @@ const totalPay = computed(() => {
 
         <button
           class="bg-red-500 m-5 p-1 rounded-md text-white font-bold hover:bg-red-600 transition-colors flex justify-center"
+          @click="$emit('empty-cart')"
         >
           <v-tooltip activator="parent" location="bottom">Empty Cart</v-tooltip>
           <svg

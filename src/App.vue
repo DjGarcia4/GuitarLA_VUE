@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { db } from "./data/guitars";
 import { useToast } from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
@@ -14,10 +14,26 @@ const guitars = ref([]);
 const cart = ref([]);
 const guitar = ref({});
 
+watch(
+  cart,
+  () => {
+    saveLocalStorage();
+  },
+  { deep: true }
+);
+
 onMounted(() => {
   guitars.value = db;
   guitar.value = db[3];
+  const cartStorage = localStorage.getItem("cart");
+  if (cartStorage) {
+    cart.value = JSON.parse(cartStorage);
+  }
 });
+
+const saveLocalStorage = () => {
+  localStorage.setItem("cart", JSON.stringify(cart.value));
+};
 
 const addCart = (guitar) => {
   const existCart = cart.value.findIndex((product) => product.id === guitar.id);
@@ -27,13 +43,12 @@ const addCart = (guitar) => {
       return;
     }
     cart.value[existCart].cant++;
-    return;
   } else {
     guitar.cant = 1;
     cart.value.push(guitar);
     $toast.success(`${guitar.name} added to the cart!`);
-    return;
   }
+  saveLocalStorage();
 };
 
 const decrementProduct = (id) => {
@@ -58,6 +73,15 @@ const incrementProduct = (id) => {
     return;
   }
 };
+
+const deleteProduct = (id) => {
+  cart.value = cart.value.filter((product) => product.id !== id);
+  $toast.success(`Product Deleted`);
+};
+const emptyCart = () => {
+  cart.value = [];
+  $toast.success(`Cart Emptied`);
+};
 </script>
 
 <template>
@@ -67,6 +91,8 @@ const incrementProduct = (id) => {
     @add-cart="addCart"
     @decrement-product="decrementProduct"
     @increment-product="incrementProduct"
+    @delete-product="deleteProduct"
+    @empty-cart="emptyCart"
   />
 
   <main class="m-10">
