@@ -28,6 +28,7 @@ defineEmits(["add-cart"]);
         type="button"
         class="bg-amber-500 p-2 rounded-md text-white font-bold hover:bg-amber-600 transition-colors"
       >
+        <v-tooltip activator="parent" location="right">Add Product</v-tooltip>
         Add to Cart
       </button>
     </div>

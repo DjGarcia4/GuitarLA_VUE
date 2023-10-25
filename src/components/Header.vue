@@ -39,6 +39,7 @@ const totalPay = computed(() => {
           d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"
         />
       </svg>
+      <v-tooltip activator="parent" location="left">Cart</v-tooltip>
       <div
         v-if="cart.length > 0"
         class="w-2 h-2 bg-red-500 rounded-full animate-ping text-white"
@@ -96,6 +97,9 @@ const totalPay = computed(() => {
                     type="button"
                     @click="$emit('decrement-product', product.id)"
                   >
+                    <v-tooltip activator="parent" location="top"
+                      >Decrement Cant</v-tooltip
+                    >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -114,6 +118,9 @@ const totalPay = computed(() => {
                     type="button"
                     @click="$emit('increment-product', product.id)"
                   >
+                    <v-tooltip activator="parent" location="top"
+                      >Increment Cant</v-tooltip
+                    >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -131,6 +138,9 @@ const totalPay = computed(() => {
               </td>
               <td>
                 <button type="button">
+                  <v-tooltip activator="parent" location="top"
+                    >Delete Product</v-tooltip
+                  >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -157,11 +167,24 @@ const totalPay = computed(() => {
         </p>
 
         <button
-          v-tooltip
-          text="Tooltip"
-          class="bg-red-500 m-5 p-1 rounded-md text-white font-bold hover:bg-red-600 transition-colors"
+          class="bg-red-500 m-5 p-1 rounded-md text-white font-bold hover:bg-red-600 transition-colors flex justify-center"
         >
-          Empty Cart
+          <v-tooltip activator="parent" location="bottom">Empty Cart</v-tooltip>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              d="M2 3a1 1 0 00-1 1v1a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1H2z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M2 7.5h16l-.811 7.71a2 2 0 01-1.99 1.79H4.802a2 2 0 01-1.99-1.79L2 7.5zm5.22 1.72a.75.75 0 011.06 0L10 10.94l1.72-1.72a.75.75 0 111.06 1.06L11.06 12l1.72 1.72a.75.75 0 11-1.06 1.06L10 13.06l-1.72 1.72a.75.75 0 01-1.06-1.06L8.94 12l-1.72-1.72a.75.75 0 010-1.06z"
+              clip-rule="evenodd"
+            />
+          </svg>
         </button>
       </div>
     </div>
@@ -182,6 +205,9 @@ const totalPay = computed(() => {
           class="bg-amber-500 m-5 p-3 rounded-md text-white font-bold hover:bg-amber-600 transition-colors"
           @click="$emit('add-cart', guitar)"
         >
+          <v-tooltip activator="parent" location="bottom"
+            >Add Product</v-tooltip
+          >
           Add to Cart
         </button>
       </div>
