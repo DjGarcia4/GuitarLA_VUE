@@ -22,11 +22,13 @@ const totalPay = computed(() => {
 });
 </script>
 <template>
-  <header class="w-full z-50 fixed p-5 flex justify-between">
+  <header
+    class="w-full z-50 fixed p-5 flex justify-between backdrop-blur-lg bg-black/50"
+  >
     <a href="/" class="">
       <img class="w-48" src="/img/logo.svg" alt="imagen logo" />
     </a>
-    <button @click="cartModal = !cartModal" class="z-50 flex">
+    <button @click="cartModal = !cartModal" class="z-50 flex items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -55,6 +57,12 @@ const totalPay = computed(() => {
     "
   >
     <div
+      v-motion
+      :initial="{ opacity: 0, y: 100 }"
+      :enter="{ opacity: 1, y: 0, scale: 1 }"
+      :variants="{ custom: { scale: 2 } }"
+      :hovered="{ scale: 1.2 }"
+      :delay="200"
       v-if="cartModal"
       id="carrito"
       class="bg-white p-3 fixed right-10 top-12 z-50 rounded-lg w-80 md:w-96 shadow-lg"
@@ -147,7 +155,10 @@ const totalPay = computed(() => {
             >${{ totalPay }}</span
           >
         </p>
+
         <button
+          v-tooltip
+          text="Tooltip"
           class="bg-red-500 m-5 p-1 rounded-md text-white font-bold hover:bg-red-600 transition-colors"
         >
           Empty Cart
